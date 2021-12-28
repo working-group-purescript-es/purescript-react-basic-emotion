@@ -1,11 +1,11 @@
 "use strict";
 
-const Emotion = require("@emotion/react");
-const createElement = Emotion.jsx;
+import { jsx, Global, css, keyframes } from "@emotion/react";
+const createElement = jsx;
 
-exports.emptyStyle = undefined;
+export const emptyStyle = undefined;
 
-exports.emptyStyleProperty = undefined;
+export const emptyStyleProperty = undefined;
 
 const flattenDataProp = (component, props) => {
   let data = null;
@@ -18,7 +18,7 @@ const flattenDataProp = (component, props) => {
   return data == null ? props : Object.assign({}, props, data);
 };
 
-exports.element_ = (component, props, areChildrenDynamic) => {
+export function element_(component, props, areChildrenDynamic) {
   const args = [component, flattenDataProp(component, props)];
   return createElement.apply(
     null,
@@ -26,15 +26,14 @@ exports.element_ = (component, props, areChildrenDynamic) => {
       ? args
       : args.concat(props.children)
   );
-};
+}
 
-exports.elementKeyed_ = (component, props) =>
-  exports.element_(component, props, true);
+export function elementKeyed_(component, props)  {   return element_(component, props, true);   }
 
-exports.global = Emotion.Global;
+export const global = Global;
 
-exports.css_ = Emotion.css;
+export const css_ = css;
 
-exports.important = prop => typeof prop === "string" ? prop + " !important" : prop;
+export function important(prop) { return typeof prop === "string" ? prop + " !important" : prop; }
 
-exports.keyframes_ = Emotion.keyframes;
+export const keyframes_ = keyframes;
